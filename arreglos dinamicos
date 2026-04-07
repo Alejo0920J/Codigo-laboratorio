@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    
+    cout << "Ingrese la cantidad de estudiantes: ";
+    cin >> n;
+
+    float *notas = new float[n];
+
+    
+    for(int i = 0; i < n; i++){
+        cout << "Ingrese la nota " << i+1 << ": ";
+        cin >> notas[i];
+    }
+    
+    float suma = 0;
+    float mayor = notas[0];
+    float menor = notas[0];
+
+    for(int i = 0; i < n; i++){
+        suma += notas[i];
+
+        if(notas[i] > mayor){
+            mayor = notas[i];
+        }
+
+        if(notas[i] < menor){
+            menor = notas[i];
+        }
+    }
+
+    float promedio = suma / n;
+
+    cout << "\nPromedio: " << promedio << endl;
+    cout << "Nota mayor: " << mayor << endl;
+    cout << "Nota menor: " << menor << endl;
+
+   
+    delete[] notas;
+
+    return 0;
+}
