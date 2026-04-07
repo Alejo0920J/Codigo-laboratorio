@@ -1,0 +1,72 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    int op;
+    string nombre, codigo, linea;
+    float nota, suma;
+    int cont;
+
+    do {
+        cout << "\n1. Registrar\n2. Listar\n3. Buscar\n4. Promedio\n5. Salir\nOpcion: ";
+        cin >> op;
+
+        if (op == 1) {
+            ofstream f("estudiantes.txt", ios::app);
+            cin.ignore();
+            cout << "Nombre: ";
+            getline(cin, nombre);
+            cout << "Codigo: ";
+            cin >> codigo;
+            cout << "Nota: ";
+            cin >> nota;
+            f << nombre << "," << codigo << "," << nota << endl;
+        }
+
+        else if (op == 2) {
+            ifstream f("estudiantes.txt");
+            while (getline(f, linea)) {
+                cout << linea << endl;
+            }
+        }
+
+        else if (op == 3) {
+            ifstream f("estudiantes.txt");
+            string cod;
+            bool ok = false;
+            cout << "Codigo: ";
+            cin >> cod;
+
+            while (getline(f, linea)) {
+                if (linea.find(cod) != string::npos) {
+                    cout << linea << endl;
+                    ok = true;
+                }
+            }
+            if (!ok) cout << "No encontrado\n";
+        }
+
+        else if (op == 4) {
+            ifstream f("estudiantes.txt");
+            suma = 0;
+            cont = 0;
+
+            while (f >> nombre) {
+                f.ignore();
+                getline(f, codigo, ',');
+                f >> nota;
+                suma += nota;
+                cont++;
+            }
+
+            if (cont > 0)
+                cout << "Promedio: " << suma / cont << endl;
+            else
+                cout << "Sin datos\n";
+        }
+
+    } while (op != 5);
+
+    return 0;
+}
