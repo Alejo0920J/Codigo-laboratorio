@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+#include <ctime>
+using namespace std;
+
+int main() {
+    string nombre;
+
+    cout << "Ingrese su nombre completo: ";
+    getline(cin, nombre);
+
+    
+    cout << "Cantidad de caracteres: " << nombre.length() << endl;
+
+    
+    string mayus = nombre;
+    for(int i = 0; i < mayus.length(); i++){
+        mayus[i] = toupper(mayus[i]);
+    }
+    cout << "En mayusculas: " << mayus << endl;
+
+    time_t t = time(0);
+    tm *fecha = localtime(&t);
+
+    int dia = fecha->tm_mday;
+    int mes = fecha->tm_mon + 1;
+    int anio = fecha->tm_year + 1900;
+
+    cout << "Fecha actual: " << dia << "/" << mes << "/" << anio << endl;
+
+    
+    string usuario = "";
+
+    for(int i = 0; i < 3 && i < nombre.length(); i++){
+        if(nombre[i] != ' '){
+            usuario += tolower(nombre[i]);
+        }
+    }
+
+    usuario += to_string(anio);
+
+    cout << "Usuario generado: " << usuario << endl;
+
+    return 0;
+}
