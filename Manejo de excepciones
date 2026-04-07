@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string entrada;
+    int numero;
+
+    try {
+        cout << "Ingrese un numero entero: ";
+        cin >> entrada;
+
+        numero = stoi(entrada);
+
+        if (numero < 0) {
+            throw "Error: el numero no puede ser negativo";
+        }
+
+        cout << "Numero valido: " << numero << endl;
+    }
+    catch (invalid_argument) {
+        cout << "Error: ingreso un valor que no es numero" << endl;
+    }
+    catch (const char* mensaje) {
+        cout << mensaje << endl;
+    }
+
+    return 0;
+}
